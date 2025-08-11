@@ -1,7 +1,44 @@
-﻿################################################################################
-# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
-################################################################################
+﻿# C++
+*.o
+*.obj
+*.out
 
-/WebApi_Clinica.Shared/obj/Debug/net8.0
-/WebApi_Inmobiliaria/.vs/WebApi_Clinica/FileContentIndex
-/WebApi_Inmobiliaria/WebApi_Inmobiliaria/obj/Debug/net8.0
+# User-specific files
+*.user
+*.suo
+*.useroptions
+*.pdb
+
+# Build and log files
+*.log
+*.bin
+*.obj
+*.pch
+*.ipch
+
+# Project build output
+[Bb]in/
+[Dd]ebug/
+[Oo]bj/
+[Rr]elease/
+
+# Visual Studio files
+.vs/
+.git/
+.gitignore
+*.sln.DotSettings
+*.vspscc
+*.vssscc
+v17/
+
+# Other files
+*.exe
+*.dll
+*.suo
+*.cache
+*.temp
+*.tmp
+*.db
+*.wal
+*.shm
+*.pid
