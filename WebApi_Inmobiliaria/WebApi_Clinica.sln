@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi_Clinica", "WebApi_Inmobiliaria\WebApi_Clinica.csproj", "{5223D242-9E27-4962-8595-34FEDFDB3EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi_Clinica.Shared", "..\WebApi_Clinica.Shared\WebApi_Clinica.Shared.csproj", "{4C1C122A-37D5-4DBE-85E7-E7FE15AF4416}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5223D242-9E27-4962-8595-34FEDFDB3EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5223D242-9E27-4962-8595-34FEDFDB3EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5223D242-9E27-4962-8595-34FEDFDB3EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5223D242-9E27-4962-8595-34FEDFDB3EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1C122A-37D5-4DBE-85E7-E7FE15AF4416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1C122A-37D5-4DBE-85E7-E7FE15AF4416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1C122A-37D5-4DBE-85E7-E7FE15AF4416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1C122A-37D5-4DBE-85E7-E7FE15AF4416}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

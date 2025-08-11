@@ -1,0 +1,82 @@
+﻿@using MVC_TABLADEVALORES_CLINICA.Models.Entities
+@model Medico
+
+<h2 style="text-align:center">
+    @ViewBag.titulo
+</h2>
+
+@{
+    ViewData["Title"] = "Medicos";
+}
+
+<a asp-action="Index">Retorna a la Tabla de Contenido</a>
+
+<div class="rectangle-container">
+    <h4>Medico</h4>
+    <hr />
+    <div class="container">
+        <form method="post" asp-action="EditarMedico" asp-controller="Medicoes" asp>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="NumeroColegiado">Numero Colegiado</label>
+                        <input asp-for="NumeroColegiado" type="number" class="form-control" style="margin-top:5px;" />
+                        <span asp-validation-for="NumeroColegiado" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-6">
+                            <label asp-for="Nombre">NOMBRE</label>
+                            <input asp-for="Nombre" type="text" class="form-control" style="margin-top:5px;" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label asp-for="Apellido">APELLIDO</label>
+                        <input asp-for="Apellido" type="text" class="form-control" style="margin-top:5px;" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="EspecialidadId">ESPECIALIDAD</label>
+                        <select asp-for="EspecialidadId" class="form-control" style="margin-top:5px;" asp-items="ViewBag.Especialidades">
+                            <option value="">Seleccione Especialidad</option>
+                        </select>
+                        <span asp-validation-for="EspecialidadId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label asp-for="Descripcion">DESCRIPCION</label>
+                        <input asp-for="Descripcion" type="text" class="form-control" style="margin-top:5px;" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" style="margin-top:10px;">ENVIAR</button>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <a asp-action="Index">Retorna a la Tabla de Contenido</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success">@TempData["MensajeExito"]</div>
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}
+

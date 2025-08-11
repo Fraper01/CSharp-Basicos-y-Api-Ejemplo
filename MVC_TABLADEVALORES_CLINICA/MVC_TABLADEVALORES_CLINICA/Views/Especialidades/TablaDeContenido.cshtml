@@ -1,0 +1,76 @@
+﻿@using MVC_TABLADEVALORES_CLINICA.Models.Entities
+@using WebApi_Clinica.Shared.Dtos
+@model List<EspecialidadDto>
+
+@{
+    ViewData["Title"] = "Especialidades";
+}
+
+<h2 style="text-align:center">
+    @ViewBag.titulo
+</h2>
+
+<div class="table-container">
+    <form asp-action="TablaDeContenido" method="get">
+        <div style="display: flex; align-items: End;">
+            <div style="margin-right: 5px;">
+                <label for="especialidadFiltro" class="sr-only">Filtros</label>
+                <input type="text" name="especialidadFiltro" id="especialidadFiltro" class="form-control" value="@ViewBag.especialidadFiltro" placeholder="Especialidad" />
+            </div>
+            <div style="margin-right: 5px;">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <p>
+        <a asp-action="AgregarEspecialidad">Agregar Especialidad</a>
+    </p>
+
+    <div style="height: 95%; overflow-y: auto; overflow-x: auto; border: 1px solid; width: 100%;">
+        <table class="table" style="table-layout: fixed; width: 100%; height: 100%;">
+            <thead>
+                <tr>
+                    <th class="sticky-header-l" style="width: 20%;">
+                        <a asp-action="TablaDeContenido" asp-route-sortOrder="@ViewBag.NombreSortParm" asp-route-filtroNombre="@ViewBag.especialidadFiltro" class="nombre-header-link">
+                            NOMBRE
+                            @if (ViewBag.NombreSortParm == "nombre_desc")
+                            {
+                                <i class="bi bi-arrow-down ms-1"></i>
+                            }
+                            else if (ViewBag.NombreSortParm == "nombre_asc")
+                            {
+                                <i class="bi bi-arrow-up ms-1"></i>
+                            }
+                        </a>
+                    </th>
+                    <th class="sticky-header-c" style="width: 32%;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width: 05px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@item.Nombre</td>
+                        <td>
+                            <div style="display: flex; flex-wrap: wrap; gap: 2px;">
+                                <a asp-action="EditarEspecialidad" class="btn botonEdit" asp-route-id="@item.Id">Editar</a> |
+                                <a asp-action="VerEspecialidad" class="btn botonDetails" asp-route-id="@item.Id">Detalle</a> |
+                                <a asp-action="MostrarEliminarEspecialidad" class="btn botonDelete" asp-route-id="@item.Id">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success">@TempData["MensajeExito"]</div>
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}

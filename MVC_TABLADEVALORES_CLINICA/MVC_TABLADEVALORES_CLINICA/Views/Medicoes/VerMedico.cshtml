@@ -1,0 +1,84 @@
+﻿@using WebApi_Clinica.Shared.Dtos
+@model MedicoDto
+
+<h2 style="text-align:center">
+    @ViewBag.titulo
+</h2>
+
+@{
+    ViewData["Title"] = "Medicos";
+}
+
+<a asp-action="Index">Retorna a la Tabla de Contenido</a>
+
+<div class="rectangle-container">
+    <h4>Medico</h4>
+    <hr />
+    <div class="container">
+        <form method="post" asp-action="VerMedico" asp-controller="Medicoes" asp>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Número de Colegiado:</strong>
+                    </div>
+                    <div class="col-6">
+                        @Model.NumeroColegiado
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Nombres:</strong>
+                    </div>
+                    <div class="col-6">
+                        @Model.Nombre
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Apellidos:</strong>
+                    </div>
+                    <div class="col-6">
+                        @Model.Apellido
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Especialidad:</strong>
+                    </div>
+                    <div class="col-6">
+                        @Model.EspecialidadNombre
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Descripción:</strong>
+                    </div>
+                    <div class="col-6">
+                        @Model.Descripcion
+                    </div>
+                </div>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <a asp-action="Index">Retorna a la Tabla de Contenido</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success">@TempData["MensajeExito"]</div>
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}
+

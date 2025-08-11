@@ -1,0 +1,158 @@
+﻿@using WebApi_Clinica.Shared.Dtos
+@model RepresentanteDto
+
+<h2 style="text-align:center">
+    @ViewBag.titulo
+</h2>
+
+@{
+    ViewData["Title"] = "Representantes";
+}
+
+<h3>Esta Usted Seguro que Desea Eliminar Este Registro de Representante.?</h3>
+<a asp-action="Index">Retorna a la Tabla de Contenido</a>
+<div class="rectangle-container">
+    <h4>Especialidad</h4>
+    <hr />
+    <div class="container">
+        <form method="post" asp-action="EliminarRepresentante" asp-controller="Representantees" asp-route-id="@Model.Id_Representante">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Nombres:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Nombres
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Dirección:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Direccion
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Celular:</strong>
+                </div>
+                <div class="col-md-4">
+                    @Model.Telefono_Celular
+                </div>
+                <div class="col-md-4">
+                    <strong>Fijo:</strong>
+                </div>
+                <div class="col-md-4">
+                    @Model.Telefono_Fijo
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Contacto:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Persona_Contacto
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Teléfono:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Telefono_Contacto
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Email:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Email
+                </div>
+            </div>
+
+            <div class="audit-container">
+                <fieldset style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <legend style="width: auto; padding: 0 10px; border-bottom: none; font-size: 1.1em; color: #333;">Información Adicional</legend>
+                    <div class="row">
+                        <div class="col-md-6 audit-box">
+                            <strong>Creación</strong>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Fecha:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Fecha_Registro.ToString("dd/MM/yyyy HH:mm:ss")
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Usuario:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Usuario_Crea
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Equipo:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Equipo_Crea
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 audit-box">
+                            <strong>Modificación</strong>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Fecha:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Fecha_Modifica.ToString("dd/MM/yyyy HH:mm:ss")
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Usuario:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Usuario_Modifica
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Equipo:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Equipo_Modifica
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="btn btn-danger" style="margin-top:10px;">ELIMINAR</button>
+            <a asp-action="Index" class="btn btn-secondary" style="margin-top:10px; margin-left: 10px;">CANCELAR</a>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <a asp-action="Index">Retorna a la Tabla de Contenido</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+  
+
+
+
+

@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Pagina de Novedades";
+}
+
+<h1>Pagina de Novedades</h1>
+
+@* Este bloque parece que mostraría las últimas publicaciones en una cuadrícula. 
+   En tu aplicación, esto implicaría una lógica para obtener y mostrar las novedades. 
+*@
+
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
+    <div class="wp-block-columns alignwide">
+        <div class="wp-block-column" style="flex-basis:56%">
+            <figure class="wp-block-image size-full">
+                <img src="https://hebbarskitchen.com/wp-content/themes/twentytwentyfive/assets/images/grid-flower-1.webp" alt="Foto de una flor" style="aspect-ratio:1;object-fit:cover" />
+            </figure>
+        </div>
+        <div class="wp-block-column is-vertically-aligned-center" style="gap:var(--wp--preset--spacing--40)">
+            <h2 class="wp-block-heading">Novedades</h2>
+            <p>
+                Como las flores que florecen en lugares inesperados, cada historia se despliega con belleza y resistencia, revelando maravillas ocultas.
+            </p>
+            <div class="wp-block-buttons">
+                <div class="wp-block-button">
+                    <a href="#" class="wp-block-button__link wp-element-button">Más información</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wp-block-group alignfull" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
+    <div class="wp-block-group alignwide" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(16rem, 1fr));gap:var(--wp--preset--spacing--50)">
+        <div class="wp-block-group" style="display:flex;flex-direction:column;align-items:center">
+            <h2 class="wp-block-heading has-x-large-font-size">Categorías principales</h2>
+        </div>
+        <div class="wp-block-group" style="display:flex;flex-direction:column;justify-content:stretch">
+            <div class="wp-block-cover is-light">
+                <img class="wp-block-cover__image-background" alt="Primer plano de un lirio flamingo rojo." src="https://hebbarskitchen.com/wp-content/themes/twentytwentyfive/assets/images/coral-square.webp" style="object-fit:cover" />
+                <span 
+                    aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim" style="background-color:#833d3a">
+                </span>
+            <div class="wp-block-cover__inner-container">
+                <div style="height:var(--wp--preset--spacing--20)" aria-hidden="true" class="wp-block-spacer">
+                </div>
+            </div>
+        </div>
+            <p class="has-text-align-center">Lirio flamingo</p>
+        </div>
+        <div class="wp-block-group" style="display:flex;flex-direction:column;justify-content:stretch">
+            <div class="wp-block-cover is-light">
+                <img 
+                    class="wp-block-cover__image-background" alt="" src="https://hebbarskitchen.com/wp-content/themes/twentytwentyfive/assets/images/campanula-alliariifolia-flower.webp" style="object-fit:cover" 
+                />
+                <span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim" style="background-color:#828282">
+
+                </span>
+            <div class="wp-block-cover__inner-container">
+                <div style="height:var(--wp--preset--spacing--20)" aria-hidden="true" class="wp-block-spacer">
+
+                </div>
+            </div>
+        </div>
+            <p class="has-text-align-center">Cactus</p>
+        </div>
+    </div>
+    <div class="wp-block-group" style="display:flex;flex-direction:column;align-items:center">
+        <h2 class="wp-block-heading has-x-large-font-size">Últimas novedades</h2>
+    </div>
+</div>
+

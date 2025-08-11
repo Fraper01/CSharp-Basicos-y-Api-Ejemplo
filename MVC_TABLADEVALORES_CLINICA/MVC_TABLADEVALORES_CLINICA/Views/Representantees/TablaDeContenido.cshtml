@@ -1,0 +1,70 @@
+﻿@using MVC_TABLADEVALORES_CLINICA.Models.Entities
+@using WebApi_Clinica.Shared.Dtos
+@model List<RepresentanteDto>
+
+@{
+    ViewData["Title"] = "Representantes";
+}
+
+<h2 style="text-align:center">
+    @ViewBag.titulo
+</h2>
+
+<div class="table-container">
+    <form asp-action="TablaDeContenido" method="get">
+        <div style="display: flex; align-items: End;">
+            <div style="margin-right: 5px;">
+                <label for="nombresFiltro" class="sr-only">Filtros</label>
+                <input type="text" name="nombresFiltro" id="nombresFiltro" class="form-control" value="@ViewBag.nombresFiltro" placeholder="Nombres" />
+            </div>
+            <div style="margin-right: 5px;">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <p>
+        <a asp-action="AgregarRepresentante">Agregar Representante</a>
+    </p>
+
+    <div style="height: 95%; overflow-y: auto; overflow-x: auto; border: 1px solid; width: 100%;">
+        <table class="table" style="table-layout: fixed; width: 100%; height: 100%;">
+            <thead>
+                <tr>
+                    <th class="sticky-header-l" style="width: 20%;">NOMBRES</th>
+                    <th class="sticky-header-l" style="width: 10%;">TELEFONO CEL</th>
+                    <th class="sticky-header-l" style="width: 20%;">EMAIL</th>
+                    <th class="sticky-header-l" style="width: 20%;">DIRECCION</th>
+                    <th class="sticky-header-c" style="width: 32%;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width: 05px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@item.Nombres</td>
+                        <td style="width: 05px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@item.Telefono_Celular</td>
+                        <td style="width: 05px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@item.Email</td>
+                        <td style="width: 05px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@item.Direccion</td>
+                        <td>
+                            <div style="display: flex; flex-wrap: wrap; gap: 2px;">
+                                <a asp-action="EditarRepresentante" class="btn botonEdit" asp-route-id="@item.Id_Representante">Editar</a> |
+                                <a asp-action="VerRepresentante" class="btn botonDetails" asp-route-id="@item.Id_Representante">Detalle</a> |
+                                <a asp-action="MostrarEliminarRepresentante" class="btn botonDelete" asp-route-id="@item.Id_Representante">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success">@TempData["MensajeExito"]</div>
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}

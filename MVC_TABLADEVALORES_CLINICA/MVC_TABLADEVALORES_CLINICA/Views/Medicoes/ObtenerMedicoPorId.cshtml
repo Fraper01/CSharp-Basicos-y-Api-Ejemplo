@@ -1,0 +1,44 @@
+﻿@using MVC_TABLADEVALORES_CLINICA.Models.Entities
+@model Medico
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>ESPECIALIDAD</th>
+            <th style="text-align:right">CARNET</th>
+            <th style="text-align:center">EDAD</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Nombre</td>
+            <td>@Model.Especialidad</td>
+            <td style="text-align:right">@Model.Especialidad</td>
+            <td style="text-align:center">@Model.Especialidad</td>
+            <td><a class="btn btn-danger">ELIMINAR</a></td>
+        </tr>
+    </tbody>
+</table>
+<br />
+
+<a id="botonVolver" asp-action="TablaDeContenido" asp-controller="Home">VOLVER AL INICIO</a>
+
+
+<style>
+    #botonVolver {
+        background-color: #77dd77; /* Color verde pastel */
+        border: none;
+        border-radius: 12px; /* Puntas redondeadas */
+        color: black; /* Letra de color blanco */
+        padding: 20px 20px; /* Espaciado entre el texto y el borde */
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        #botonVolver:hover {
+            background-color: green;
+            color: white;
+        }
+</style>

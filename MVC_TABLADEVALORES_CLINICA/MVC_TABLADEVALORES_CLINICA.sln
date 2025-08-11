@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_TABLADEVALORES_CLINICA", "MVC_TABLADEVALORES_CLINICA\MVC_TABLADEVALORES_CLINICA.csproj", "{B72BE579-16D4-45B3-8394-2B80D063D8B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi_Clinica.Shared", "..\..\WebApi_Clinica.Shared\WebApi_Clinica.Shared.csproj", "{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B72BE579-16D4-45B3-8394-2B80D063D8B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72BE579-16D4-45B3-8394-2B80D063D8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72BE579-16D4-45B3-8394-2B80D063D8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72BE579-16D4-45B3-8394-2B80D063D8B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

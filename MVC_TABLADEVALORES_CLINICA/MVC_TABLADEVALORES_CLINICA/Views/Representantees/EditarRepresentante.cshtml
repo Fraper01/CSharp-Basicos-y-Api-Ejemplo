@@ -1,0 +1,80 @@
+﻿@model MVC_TABLADEVALORES_CLINICA.Models.ViewModels.RepresentanteEdicionViewModel
+
+<h2 style="text-align:center">
+    @ViewBag.titulo
+</h2>
+
+@{
+    ViewData["Title"] = "Representantes";
+}
+
+<a asp-action="Index">Retorna a la Tabla de Contenido</a>
+<div class="rectangle-container">
+    <h4>Representante</h4>
+    <hr />
+    <div class="container">
+        <form method="post" asp-action="EditarRepresentante" asp-controller="Representantees" asp>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id_Representante" />
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="Nombres">NOMBRES</label>
+                    <input asp-for="Nombres" type="text" class="form-control" style="margin-top:5px;" />
+                    <span asp-validation-for="Nombres" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <label asp-for="Direccion">DIRECCION</label>
+                    <input asp-for="Direccion" type="text" class="form-control" style="margin-top:5px;" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="Telefono_Celular">CELULAR</label>
+                    <input asp-for="Telefono_Celular" type="text" class="form-control" style="margin-top:5px;" />
+                    <span asp-validation-for="Telefono_Celular" class="text-danger"></span>
+                </div>
+                <div class="col-4">
+                    <label asp-for="Telefono_Fijo">TEL.FIJO</label>
+                    <input asp-for="Telefono_Fijo" type="text" class="form-control" style="margin-top:5px;" />
+                    <span asp-validation-for="Telefono_Fijo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="Persona_Contacto">CONTACTO</label>
+                    <input asp-for="Persona_Contacto" type="text" class="form-control" style="margin-top:5px;" />
+                    <span asp-validation-for="Persona_Contacto" class="text-danger"></span>
+                </div>
+                <div class="col-4">
+                    <label asp-for="Telefono_Contacto">TELEFONO</label>
+                    <input asp-for="Telefono_Contacto" type="text" class="form-control" style="margin-top:5px;" />
+                    <span asp-validation-for="Telefono_Contacto" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="Email">EMAIL</label>
+                    <input asp-for="Email" type="text" class="form-control" style="margin-top:5px;" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" style="margin-top:10px;">ENVIAR</button>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <a asp-action="Index">Retorna a la Tabla de Contenido</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

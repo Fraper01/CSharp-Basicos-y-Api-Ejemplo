@@ -1,0 +1,191 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+th.sticky-header-c {
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background-color: royalblue;
+    color: white;
+}
+
+th.sticky-header-l {
+    text-align: left;
+    position: sticky;
+    top: 0;
+    background-color: royalblue;
+    color: white;
+}
+
+th.sticky-header-r {
+    text-align: right;
+    position: sticky;
+    top: 0;
+    background-color: royalblue;
+    color: white;
+}
+
+.nombre-header-link {
+    /*color: inherit; /* O el color de texto que desees */
+    color: white; /* Cambiamos el color del texto a blanco */
+    /* background-color: white; la comentamos */
+    padding: 2px 5px;
+    border-radius: 3px; /* Opcional */
+    text-decoration: none; /* Opcional: para quitar el subrayado del enlace si lo deseas */
+}
+
+.botonEdit {
+    background-color: #77dd77; /* Color verde pastel */
+    border: none;
+    border-radius: 8px; /* Puntas redondeadas */
+    color: black; /* Letra de color blanco */
+    padding: 8px 12px; /* Espaciado entre el texto y el borde */
+    /*font-size: 15px;*/
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+    .botonEdit:hover {
+        background-color: green;
+        color: white;
+    }
+
+.botonDetails {
+    background-color: #6fa8dc; /* Color azul pastel */
+    border: none;
+    border-radius: 8px; /* Puntas redondeadas */
+    color: black; /* Letra de color blanco */
+    padding: 8px 12px; /* Espaciado entre el texto y el borde */
+    /*font-size: 15px;*/
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+    .botonDetails:hover {
+        background-color: blue;
+        color: white;
+    }
+
+.botonDelete {
+    background-color: #ea9999; /* Color rojo pastel */
+    border: none;
+    border-radius: 8px; /* Puntas redondeadas */
+    color: black; /* Letra de color blanco */
+    padding: 8px 12px; /* Espaciado entre el texto y el borde */
+    /*font-size: 15px;*/
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+    .botonDelete:hover {
+        background-color: red;
+        color: white;
+    }
+
+.rectangle-container {
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90vw; /* El rectángulo ocupa el 90% del ancho de la ventana */
+    max-width: 800px; /* Ancho máximo para evitar que se estire demasiado en pantallas grandes */
+    height: 60vh; /* El rectángulo ocupa el 60% del alto de la ventana */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido excede el alto */
+    margin: 20px auto; /* Centra el rectángulo horizontalmente */
+}
+
+.table-container {
+    width: 90vw; /* El rectángulo ocupa el 90% del ancho de la ventana */
+    max-width: 1200px; /* Ancho máximo para evitar que se estire demasiado */
+    margin: 20px auto; /* Centra horizontalmente y agrega margen */
+    padding: 20px; /* Agrega un relleno si lo deseas */
+    /*border: 2px solid #ccc;*/
+    height: 75vh; /* El rectángulo ocupa el 60% del alto de la ventana */
+}
+.main-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.audit-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff; /* Fondo blanco para el contenedor de auditoría */
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sutil sombra para levantar el contenedor */
+}
+
+.audit-box {
+    padding: 10px;
+    border: 1px solid #eee; /* Borde sutil para cada "rectángulo" */
+    border-radius: 3px;
+    background-color: #fefefe; /* Fondo ligeramente grisáceo para los rectángulos */
+}
+
+    .audit-box strong {
+        display: block; /* Hace que el título ocupe toda la línea */
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+@media (max-width: 768px) {
+    /* Estilos para telas menores que 768px */
+    .rectangle-container {
+        width: 95vw;
+        height: auto; /* Ajusta a altura automaticamente */
+    }
+
+    .table-container {
+        width: 95vw;
+        height: auto; /* Ajusta a altura automaticamente */
+    }
+
+    .botonEdit, .botonDetails, .botonDelete {
+        font-size: 0.8em; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Estilos para telas menores que 480px */
+    .rectangle-container {
+        padding: 10px; /* Reduz o preenchimento */
+    }
+
+    .table-container {
+        padding: 10px; /* Reduz o preenchimento */
+    }
+
+    .botonEdit, .botonDetails, .botonDelete {
+        font-size: 0.8em; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+        padding: 2px 4px;
+    }
+}

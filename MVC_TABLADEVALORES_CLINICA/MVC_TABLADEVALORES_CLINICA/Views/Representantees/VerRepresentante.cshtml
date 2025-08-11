@@ -1,0 +1,158 @@
+﻿@using WebApi_Clinica.Shared.Dtos
+@model RepresentanteDto
+
+<h2 style="text-align:center">
+    @ViewBag.titulo
+</h2>
+
+@{
+    ViewData["Title"] = "Representantes";
+}
+
+<a asp-action="Index">Retorna a la Tabla de Contenido</a>
+
+<div class="main-container">
+    <h4>Representante</h4>
+    <hr />
+    <div class="container">
+        <form method="post" asp-action="VerRepresentante" asp-controller="Representantees">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Nombres:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Nombres
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Dirección:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Direccion
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Celular:</strong>
+                </div>
+                <div class="col-md-4">
+                    @Model.Telefono_Celular
+                </div>
+                <div class="col-md-4">
+                    <strong>Fijo:</strong>
+                </div>
+                <div class="col-md-4">
+                    @Model.Telefono_Fijo
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Contacto:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Persona_Contacto
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Teléfono:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Telefono_Contacto
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <strong>Email:</strong>
+                </div>
+                <div class="col-md-8">
+                    @Model.Email
+                </div>
+            </div>
+
+            <div class="audit-container">
+                <fieldset style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <legend style="width: auto; padding: 0 10px; border-bottom: none; font-size: 1.1em; color: #333;">Información Adicional</legend>
+                    <div class="row">
+                        <div class="col-md-6 audit-box">
+                            <strong>Creación</strong>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Fecha:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Fecha_Registro.ToString("dd/MM/yyyy HH:mm:ss")
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Usuario:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Usuario_Crea
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Equipo:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Equipo_Crea
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 audit-box">
+                            <strong>Modificación</strong>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Fecha:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Fecha_Modifica.ToString("dd/MM/yyyy HH:mm:ss")
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Usuario:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Usuario_Modifica
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <strong>Equipo:</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    @Model.Equipo_Modifica
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <a asp-action="Index">Retorna a la Tabla de Contenido</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@if (TempData["MensajeExito"] != null)
+{
+    <div class="alert alert-success">@TempData["MensajeExito"]</div>
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}
