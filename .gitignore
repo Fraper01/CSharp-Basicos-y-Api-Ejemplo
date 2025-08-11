@@ -1,0 +1,7 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/WebApi_Clinica.Shared/obj/Debug/net8.0
+/WebApi_Inmobiliaria/.vs/WebApi_Clinica/FileContentIndex
+/WebApi_Inmobiliaria/WebApi_Inmobiliaria/obj/Debug/net8.0

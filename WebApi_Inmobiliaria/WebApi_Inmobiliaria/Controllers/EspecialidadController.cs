@@ -42,8 +42,7 @@ namespace WebApi_Clinica.Controllers
             }
         }
 
-        // [HttpGet("/{id}")]
-        [HttpGet("{id}")] // Cambia la ruta a {id}
+        [HttpGet("{id}")] 
         public async Task<EspecialidadDto?> ReadAsync(int id)
         {
             return await especialidadService.GetAsync(id);
@@ -55,7 +54,7 @@ namespace WebApi_Clinica.Controllers
             bool exists = await especialidadService.ExistsAsync(id);
             if (exists)
             {
-                return Ok(true); // O 204 No Content si prefieres un cuerpo vacío
+                return Ok(true); // 204 cuerpo vacío
             }
             else
             {
@@ -69,7 +68,7 @@ namespace WebApi_Clinica.Controllers
             return await especialidadService.GetAllAsync();
         }
 
-        [HttpPut("{id}")] // Cambia la ruta a {id}
+        [HttpPut("{id}")] 
         public async Task<Especialidad?> Update(int id, Especialidad Entity)
         {
             if (Entity.Id != id)

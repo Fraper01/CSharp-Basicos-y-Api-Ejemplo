@@ -42,7 +42,7 @@ namespace WebApi_Clinica.Controllers
             }
         }
 
-        [HttpGet("{id}")] // Cambia la ruta a {id}
+        [HttpGet("{id}")] 
         public async Task<RepresentanteDto?> ReadAsync(int id)
         {
             return await representanteService.GetAsync(id);
@@ -54,7 +54,7 @@ namespace WebApi_Clinica.Controllers
             bool exists = await representanteService.ExistsAsync(id);
             if (exists)
             {
-                return Ok(true); // O 204 No Content si prefieres un cuerpo vacío
+                return Ok(true); // 204 cuerpo vacío
             }
             else
             {
@@ -68,7 +68,7 @@ namespace WebApi_Clinica.Controllers
             return await representanteService.GetAllAsync();
         }
 
-        [HttpPut("{id}")] // Cambia la ruta a {id}
+        [HttpPut("{id}")] 
         public async Task<Representante?> Update(int id, Representante Entity)
         {
             if (Entity.Id_Representante != id)

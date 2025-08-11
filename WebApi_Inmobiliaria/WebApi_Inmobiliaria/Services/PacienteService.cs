@@ -60,10 +60,9 @@ namespace WebApi_Clinica.Services
 
         public async Task<List<PacienteDto>?> GetAllAsync()
         {
-            // Manejar el caso donde el contexto podría ser nulo.
             if (context == null)
             {
-                return null; // throw new InvalidOperationException("Context is null");
+                return null; 
             }
             try
             {
@@ -84,7 +83,7 @@ namespace WebApi_Clinica.Services
                         Observaciones = m.Observaciones,
                         Foto = m.Foto,
                         Id_Representante = m.Id_Representante,
-                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", //Manejo de nulos
+                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", 
                         Tipo_Identificacion = m.Tipo_Identificacion,
                         Identificacion = m.Identificacion,
                         Direccion_Postal = m.Direccion_Postal,
@@ -108,17 +107,13 @@ namespace WebApi_Clinica.Services
 
         public async Task<PacienteDto?> GetAsync(object id)
         {
-            // Manejar el caso donde el contexto podría ser nulo.
             if (context == null)
             {
-                return null; // throw new InvalidOperationException("Context is null");
+                return null; 
             }
             try
             {
-                // 1. se pasa el id a entero para se utilizado luego por se un object
                 var idInt = Convert.ToInt32(id);
-                // 2. Intenta encontrar el paciente usando FindAsync (más eficiente para clave primaria) no funciona Dto
-                //    Proyecta a PacienteDto (si es necesario)
                 var pacienteBuscado = await context.Pacientes.Select(m => new PacienteDto
                 {
                     Id_Paciente = m.Id_Paciente,
@@ -135,7 +130,7 @@ namespace WebApi_Clinica.Services
                     Observaciones = m.Observaciones,
                     Foto = m.Foto,
                     Id_Representante = m.Id_Representante,
-                    Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", //Manejo de nulos
+                    Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", 
                     Tipo_Identificacion = m.Tipo_Identificacion,
                     Identificacion = m.Identificacion,
                     Direccion_Postal = m.Direccion_Postal,
@@ -149,7 +144,6 @@ namespace WebApi_Clinica.Services
                     Derivado_Por = m.Derivado_Por,
                     Estado = m.Estado
                 }).FirstOrDefaultAsync(m => m.Id_Paciente == idInt);
-                // 3. Si no se encuentra, devuelve null
                 if (pacienteBuscado == null)
                 {
                     return null;
@@ -164,15 +158,12 @@ namespace WebApi_Clinica.Services
 
         public async Task<PacienteDto?> GetByIdAsync(int id)
         {
-            // Manejar el caso donde el contexto podría ser nulo.
             if (context == null)
             {
-                return null; // throw new InvalidOperationException("Context is null");
+                return null; 
             }
             try
             {
-                // 2. Intenta encontrar el paciente usando FindAsync (más eficiente para clave primaria) no funciona Dto
-                //    Proyecta a PacienteDto (si es necesario)
                 var pacienteBuscado = await context.Pacientes.Select(m => new PacienteDto
                 {
                     Id_Paciente = m.Id_Paciente,
@@ -189,7 +180,7 @@ namespace WebApi_Clinica.Services
                     Observaciones = m.Observaciones,
                     Foto = m.Foto,
                     Id_Representante = m.Id_Representante,
-                    Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", //Manejo de nulos
+                    Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", 
                     Tipo_Identificacion = m.Tipo_Identificacion,
                     Identificacion = m.Identificacion,
                     Direccion_Postal = m.Direccion_Postal,
@@ -203,7 +194,6 @@ namespace WebApi_Clinica.Services
                     Derivado_Por = m.Derivado_Por,
                     Estado = m.Estado
                 }).FirstOrDefaultAsync(m => m.Id_Paciente == id);
-                // 2. Si no se encuentra, devuelve null
                 if (pacienteBuscado == null)
                 {
                     return null;
@@ -218,10 +208,9 @@ namespace WebApi_Clinica.Services
 
         public async Task<List<PacienteDto>?> ReadAllAsync()
         {
-            // Manejar el caso donde el contexto podría ser nulo.
             if (context == null)
             {
-                return null; // throw new InvalidOperationException("Context is null");
+                return null; 
             }
             try
             {
@@ -242,7 +231,7 @@ namespace WebApi_Clinica.Services
                         Observaciones = m.Observaciones,
                         Foto = m.Foto,
                         Id_Representante = m.Id_Representante,
-                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", //Manejo de nulos
+                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", 
                         Tipo_Identificacion = m.Tipo_Identificacion,
                         Identificacion = m.Identificacion,
                         Direccion_Postal = m.Direccion_Postal,
@@ -305,10 +294,9 @@ namespace WebApi_Clinica.Services
         }
         public async Task<List<PacienteDto>?> GetPacienteByRepresentanteAsync(int representanteId)
         {
-            // Manejar el caso donde el contexto podría ser nulo.
             if (context == null)
             {
-                return null; // throw new InvalidOperationException("Context is null");
+                return null; 
             }
             try
             {
@@ -330,7 +318,7 @@ namespace WebApi_Clinica.Services
                         Observaciones = m.Observaciones,
                         Foto = m.Foto,
                         Id_Representante = m.Id_Representante,
-                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", //Manejo de nulos
+                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", 
                         Tipo_Identificacion = m.Tipo_Identificacion,
                         Identificacion = m.Identificacion,
                         Direccion_Postal = m.Direccion_Postal,
@@ -344,7 +332,7 @@ namespace WebApi_Clinica.Services
                         Derivado_Por = m.Derivado_Por,
                         Estado = m.Estado
                     })
-                    .ToListAsync(); // Ejecuta la consulta y materializa el resultado en una lista.
+                    .ToListAsync(); 
                 return pacientes;
             }
             catch (Exception)

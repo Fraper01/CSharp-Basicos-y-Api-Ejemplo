@@ -39,13 +39,11 @@ namespace WebApi_Clinica.Controllers
             }
             catch (Exception)
             {
-                //_logger.LogError(ex, $"Error al eliminar médico con ID: {id}");
                 return StatusCode(500, "Ocurrió un error interno. Intente nuevamente.");
             }
         }
 
-        // [HttpGet("/{id}")]
-        [HttpGet("{id}")] // Cambia la ruta a {id}
+        [HttpGet("{id}")] 
         public async Task<MedicoDto?> ReadAsync(int id)
         {
             return await clinicaService.GetAsync(id);
@@ -57,7 +55,7 @@ namespace WebApi_Clinica.Controllers
             return await clinicaService.GetAllAsync();
         }
 
-        [HttpPut("{id}")] // Cambia la ruta a {id}
+        [HttpPut("{id}")] 
         public async Task<Medico?> Update(int id, Medico Entity)
         {
             if (Entity.Id != id)

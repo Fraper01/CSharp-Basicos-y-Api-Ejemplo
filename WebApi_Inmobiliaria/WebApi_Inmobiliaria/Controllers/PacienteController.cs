@@ -42,7 +42,7 @@ namespace WebApi_Clinica.Controllers
             }
         }
 
-        [HttpGet("{id}")] // Cambia la ruta a {id}
+        [HttpGet("{id}")] 
         public async Task<PacienteDto?> ReadAsync(int id)
         {
             return await pacienteService.GetAsync(id);
@@ -54,7 +54,7 @@ namespace WebApi_Clinica.Controllers
             return await pacienteService.GetAllAsync();
         }
 
-        [HttpPut("{id}")] // Cambia la ruta a {id}
+        [HttpPut("{id}")] 
         public async Task<Paciente?> Update(int id, Paciente Entity)
         {
             if (Entity.Id_Paciente != id)

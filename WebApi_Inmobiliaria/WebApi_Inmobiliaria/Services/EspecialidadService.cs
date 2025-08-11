@@ -5,7 +5,7 @@ using WebApi_Clinica.Shared.Dtos;
 
 namespace WebApi_Clinica.Services
 {
-    public class EspecialidadService /* : ICRUD<Especialidad>*/
+    public class EspecialidadService 
     {
         private readonly ClinicaContext context;
         public EspecialidadService(ClinicaContext _context)
@@ -70,16 +70,12 @@ namespace WebApi_Clinica.Services
 
         public async Task<EspecialidadDto?> GetAsync(object id)
         {
-            // 1. se pasa el id a entero para se utilizado luego por se un object
             var idInt = Convert.ToInt32(id);
-            // 2. Intenta encontrar el médico usando FindAsync (más eficiente para clave primaria)
-            //    Proyecta a MedicoDto (si es necesario)
             var especialidadBuscada = await context.Especialidades05.Select(m => new EspecialidadDto
             {
                 Id = m.Id,
                 Nombre = m.Nombre
             }).FirstOrDefaultAsync(m => m.Id == idInt);
-            // 3. Si no se encuentra, devuelve null
             if (especialidadBuscada == null)
             {
                 return null;
@@ -89,14 +85,11 @@ namespace WebApi_Clinica.Services
 
         public async Task<EspecialidadDto?> GetByIdAsync(int id)
         {
-            // 2. Intenta encontrar el médico usando FindAsync (más eficiente para clave primaria)
-            //    Proyecta a MedicoDto (si es necesario)
             var especialidadBuscada = await context.Especialidades05.Select(m => new EspecialidadDto
             {
                 Id = m.Id,
                 Nombre = m.Nombre
             }).FirstOrDefaultAsync(m => m.Id == id);
-            // 3. Si no se encuentra, devuelve null
             if (especialidadBuscada == null)
             {
                 return null;
@@ -131,10 +124,9 @@ namespace WebApi_Clinica.Services
         }
         public async Task<List<MedicoDto>?> GetMedicosByEspecialidadAsync(int especialidadId)
         {
-            // Manejar el caso donde el contexto podría ser nulo.
             if (context == null)
             {
-                return null; // throw new InvalidOperationException("Context is null");
+                return null; 
             }
             try
             {
@@ -146,11 +138,11 @@ namespace WebApi_Clinica.Services
                         NumeroColegiado = m.NumeroColegiado,
                         Nombre = m.Nombre,
                         Apellido = m.Apellido,
-                        EspecialidadNombre = m.Especialidad != null ? m.Especialidad.Nombre : "Sin Especialidad", //Manejo de nulos
+                        EspecialidadNombre = m.Especialidad != null ? m.Especialidad.Nombre : "Sin Especialidad", 
                         Descripcion = m.Descripcion,
                         EspecialidadId = m.EspecialidadId
                     })
-                    .ToListAsync(); // Ejecuta la consulta y materializa el resultado en una lista.
+                    .ToListAsync(); 
                 return medicos;
             }
             catch (Exception)

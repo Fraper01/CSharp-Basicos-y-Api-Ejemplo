@@ -85,10 +85,7 @@ namespace WebApi_Clinica.Services
 
         public async Task<RepresentanteDto?> GetAsync(object id)
         {
-            // 1. se pasa el id a entero para se utilizado luego por se un object
             var idInt = Convert.ToInt32(id);
-            // 2. Intenta encontrar el representante usando FindAsync (más eficiente para clave primaria) pero con Dto no funciona
-            //    Proyecta a RepresentanteDto (si es necesario)
             var representanteBuscado = await context.Representantes.Select(m => new RepresentanteDto
             {
                 Id_Representante = m.Id_Representante,
@@ -109,7 +106,6 @@ namespace WebApi_Clinica.Services
                 Equipo_Modifica = m.Equipo_Modifica,
                 Estado = m.Estado
             }).FirstOrDefaultAsync(m => m.Id_Representante == idInt);
-            // 3. Si no se encuentra, devuelve null
             if (representanteBuscado == null)
             {
                 return null;
@@ -119,8 +115,6 @@ namespace WebApi_Clinica.Services
 
         public async Task<RepresentanteDto?> GetByIdAsync(int id)
         {
-            // 2. Intenta encontrar el representante usando FindAsync (más eficiente para clave primaria) pero con Dto no funciona
-            //    Proyecta a RepresentanteDto (si es necesario)
             var representanteBuscado = await context.Representantes.Select(m => new RepresentanteDto
             {
                 Id_Representante = m.Id_Representante,
@@ -141,7 +135,6 @@ namespace WebApi_Clinica.Services
                 Equipo_Modifica = m.Equipo_Modifica,
                 Estado = m.Estado
             }).FirstOrDefaultAsync(m => m.Id_Representante == id);
-            // 3. Si no se encuentra, devuelve null
             if (representanteBuscado == null)
             {
                 return null;
@@ -207,10 +200,9 @@ namespace WebApi_Clinica.Services
         }
         public async Task<List<PacienteDto>?> GetPacientesByRepresentanteAsync(int representanteId)
         {
-            // Manejar el caso donde el contexto podría ser nulo.
             if (context == null)
             {
-                return null; // throw new InvalidOperationException("Context is null");
+                return null; 
             }
             try
             {
@@ -225,13 +217,13 @@ namespace WebApi_Clinica.Services
                         Observaciones = m.Observaciones,
                         Foto = m.Foto,
                         Id_Representante = m.Id_Representante,
-                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", //Manejo de nulos
+                        Nombre_Representante = m.Representante != null ? m.Representante.Nombres : "Sin Representante", 
                         Certificado_Discapacidad = m.Certificado_Discapacidad,
                         Grado_Dependencia = m.Grado_Dependencia,
                         Fecha_Certificado = m.Fecha_Certificado,
                         Derivado_Por = m.Derivado_Por
                     })
-                    .ToListAsync(); // Ejecuta la consulta y materializa el resultado en una lista.
+                    .ToListAsync(); 
                 return pacientes;
             }
             catch (Exception)
