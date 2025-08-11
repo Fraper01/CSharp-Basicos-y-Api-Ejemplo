@@ -31,11 +31,10 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
                 var jsonString = await response.Content.ReadAsStringAsync();
                 // Deserializa a la clase que representa la estructura completa
                 var respuestaApi = JsonSerializer.Deserialize<RespuestaApiMedicos>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                // Accede a la lista de médicos desde la propiedad "Medicos"
-                List<MedicoDto> medicosEntities = respuestaApi?.Medicos ?? new List<MedicoDto>(); // Manejo de null
+                List<MedicoDto> medicosEntities = respuestaApi?.Medicos ?? new List<MedicoDto>(); 
                 if (medicosEntities == null)
                 {
-                    return new List<MedicoDto>(); // Retorna una lista vacía si no hay datos
+                    return new List<MedicoDto>(); 
                 }
                 List<MedicoDto> medicosDtos = medicosEntities.Select(medico => new MedicoDto
                 {
@@ -65,19 +64,17 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
 
         public async Task<bool> AgregarMedico(Medico medico)
         {
-            // Verifica si la especialidad existe usando el endpoint Exists
             var responseEspecialidad = await httpClient.GetAsync($"{baseUrlEspecialidad}/Exists/{medico.EspecialidadId}");
             if (!responseEspecialidad.IsSuccessStatusCode)
             {
-                // Si la especialidad no existe, lanza una excepción
                 var errorContent = await responseEspecialidad.Content.ReadAsStringAsync();
                 throw new EspecialidadNoEncontradaException($"La especialidad con ID {medico.EspecialidadId} NO EXISTE. Respuesta WebApi: {errorContent}");
             }
             try
             {
                 var response = await httpClient.PostAsJsonAsync(baseUrl, medico);
-                response.EnsureSuccessStatusCode(); // Lanza una excepción si hay un error
-                return response.IsSuccessStatusCode; // Retorna un booleano
+                response.EnsureSuccessStatusCode(); 
+                return response.IsSuccessStatusCode; 
             }
             catch (HttpRequestException)
             {
@@ -90,11 +87,9 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
         }
         public async Task<bool> ActualizarMedico(Medico medico)
         {
-            // Verifica si la especialidad existe usando el endpoint Exists
             var responseEspecialidad = await httpClient.GetAsync($"{baseUrlEspecialidad}/Exists/{medico.EspecialidadId}");
             if (!responseEspecialidad.IsSuccessStatusCode)
             {
-                // Si la especialidad no existe, lanza una excepción
                 var errorContent = await responseEspecialidad.Content.ReadAsStringAsync();
                 throw new EspecialidadNoEncontradaException($"La especialidad con ID {medico.EspecialidadId} NO EXISTE. Respuesta WebApi: {errorContent}");
             }
@@ -102,7 +97,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
             {
                 var response = await httpClient.PutAsJsonAsync($"{baseUrl}/{medico.Id}", medico);
                 response.EnsureSuccessStatusCode(); // Lanza una excepción si hay un error
-                return response.IsSuccessStatusCode; // Retorna un booleano
+                return response.IsSuccessStatusCode; 
             }
             catch (HttpRequestException)
             {
@@ -137,14 +132,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
             }
         }
 
-        // Acción para mostrar la lista de médicos por especialidad
         public async Task<List<MedicoDto>>? PorEspecialidad(int especialidadId)
         {
             try
             {
-                // Construye la URL de la API para obtener los médicos por especialidad.
                 string url = $"{baseUrl}/Especialidad/{especialidadId}";
-                // Llama a la API para obtener los datos.
                 HttpResponseMessage response = await httpClient.GetAsync(url);
                 if (response.StatusCode == HttpStatusCode.NotFound)
                 {
@@ -154,11 +146,10 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
                 var jsonString = await response.Content.ReadAsStringAsync();
                 // Deserializa a la clase que representa la estructura completa
                 var respuestaApi = JsonSerializer.Deserialize<RespuestaApiMedicos>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                // Accede a la lista de médicos desde la propiedad "Medicos"
-                List<MedicoDto> medicosEntities = respuestaApi?.Medicos ?? new List<MedicoDto>(); // Manejo de null
+                List<MedicoDto> medicosEntities = respuestaApi?.Medicos ?? new List<MedicoDto>(); 
                 if (medicosEntities == null)
                 {
-                    return new List<MedicoDto>(); // Retorna una lista vacía si no hay datos
+                    return new List<MedicoDto>(); 
                 }
                 List<MedicoDto> medicosDtos = medicosEntities.Select(medico => new MedicoDto
                 {
@@ -183,7 +174,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
     // Clase para representar la estructura completa del JSON
     public class RespuestaApiMedicos
     {
-        [JsonPropertyName("$values")] // Esto mapea la propiedad "$values" del JSON
+        [JsonPropertyName("$values")] 
         public List<MedicoDto>? Medicos { get; set; }
     }
 }

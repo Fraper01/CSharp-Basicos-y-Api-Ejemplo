@@ -8,10 +8,9 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
 {
     public class RepresentanteesController : Controller
     {
-        //HTTP: get, post, put, delete (RESTFULL)
 
         private readonly RepresentanteApiService representanteApiService;
-        private readonly ILogger<MedicoesController> logger; // Añade lista de Errores al log
+        private readonly ILogger<MedicoesController> logger; 
 
         public RepresentanteesController(RepresentanteApiService _representanteApiService, ILogger<MedicoesController> _logger)
         {
@@ -53,7 +52,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     TempData["MensajeError"] = "Error de HTTP al obtener la lista de representantes.";
                     logger.LogError(ex, "Error al obtener especialidades: Error de HTTP.");
                 }
-                return View(new List<RepresentanteDto>()); // Devuelve una lista vacía para no romper la página.
+                return View(new List<RepresentanteDto>()); 
             }
             catch (Exception ex)
             {
@@ -92,7 +91,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     if (socketEx.SocketErrorCode == System.Net.Sockets.SocketError.ConnectionRefused)
                     {
                         TempData["MensajeError"] = "No se pudo conectar con la API de representantes. Compruebe que la API esté en ejecución.";
-                        logger.LogError(ex, "Error al obtener representantes: Conexión rechazada."); // Log
+                        logger.LogError(ex, "Error al obtener representantes: Conexión rechazada."); 
                     }
                     else
                     {
@@ -123,7 +122,6 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
             {
                 try
                 {
-                    // Crea la instancia de tu entidad 'Representante'
                     var representante = new Representante
                     {
                         Nombres = viewModel.Nombres,
@@ -138,12 +136,12 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                         Usuario_Crea = User?.Identity?.Name ?? "System",
                         Equipo_Crea = Environment.MachineName,
                         Estado = "Activo"
-                    };                    // Llamada a la API
+                    };                    
                     bool agregado = await representanteApiService.AgregarRepresentante(representante);
                     if (agregado)
                     {
                         TempData["MensajeExito"] = "Representante agregada correctamente.";
-                        return RedirectToAction(nameof(TablaDeContenido)); // Redirigir a la lista de especialidades
+                        return RedirectToAction(nameof(TablaDeContenido)); 
                     }
                     else
                     {
@@ -158,7 +156,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     ModelState.AddModelError(string.Empty, "Error al agregar el Representante.");
                 }
             }
-            return View(viewModel); // Mostrar la vista con errores
+            return View(viewModel); 
         }
 
         [HttpGet]
@@ -166,12 +164,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             ViewBag.titulo = "EDITAR REPRESENTANTE";
 
-            RepresentanteDto? representante = await representanteApiService.ObtenerRepresentantePorId(id); // Llamada a la API
+            RepresentanteDto? representante = await representanteApiService.ObtenerRepresentantePorId(id); 
             if (representante == null)
             {
                 return BadRequest("La Especialidad no existe");
             }
-            // 2. Mapear el DTO a la Entidad
             var viewModel = new RepresentanteEdicionViewModel
             {
                 Id_Representante = representante.Id_Representante,
@@ -195,7 +192,6 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             if (ModelState.IsValid)
             {
-                // 1. Obtener la entidad original de la base de datos
                 RepresentanteDto? representanteOriginal = await representanteApiService.ObtenerRepresentantePorId(viewModel.Id_Representante);
 
                 if (representanteOriginal == null)
@@ -203,7 +199,6 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     return NotFound("Error al recuperar el representante original.");
                 }
 
-                // 2. Mapear los valores editables del ViewModel a una nueva entidad
                 var representanteActualizado = new Representante
                 {
                     Id_Representante = viewModel.Id_Representante,
@@ -216,12 +211,9 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     Email = viewModel.Email,
                     Tipo_Identificacion = viewModel.Tipo_Identificacion,
                     Identificacion = viewModel.Identificacion,
-                    // 3. Preservar los valores de auditoría de la entidad original
                     Fecha_Registro = representanteOriginal.Fecha_Registro,
                     Usuario_Crea = representanteOriginal.Usuario_Crea,
                     Equipo_Crea = representanteOriginal.Equipo_Crea,
-                    //Estado = representanteOriginal.Estado,
-                    // 4. Establecer los valores de modificación
                     Fecha_Modifica = DateTime.Now,
                     Usuario_Modifica = User?.Identity?.Name ?? "System",
                     Equipo_Modifica = Environment.MachineName,
@@ -229,11 +221,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                 };
                 try
                 {
-                    bool actualizado = await representanteApiService.ActualizarRepresentante(representanteActualizado); // Llamada a la API
+                    bool actualizado = await representanteApiService.ActualizarRepresentante(representanteActualizado); 
                     if (actualizado)
                     {
                         TempData["MensajeExito"] = "Representante modificado correctamente.";
-                        return RedirectToAction(nameof(TablaDeContenido)); // Redirigir a la lista de representantes
+                        return RedirectToAction(nameof(TablaDeContenido)); 
                     }
                     else
                     {
@@ -247,7 +239,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     ModelState.AddModelError(string.Empty, "Error al agregar el Representante.");
                 }
             }
-            return View(viewModel); // Mostrar la vista con errores
+            return View(viewModel); 
         }
 
         [HttpGet]
@@ -255,12 +247,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             ViewBag.titulo = "CONSULTA REPRESENTANTES";
 
-            RepresentanteDto? representante = await representanteApiService.ObtenerRepresentantePorId(id); // Llamada a la API
+            RepresentanteDto? representante = await representanteApiService.ObtenerRepresentantePorId(id); 
             if (representante == null)
             {
                 return BadRequest("La representante no existe");
             }
-            // 2. Mapear el DTO a la Entidad
             var representanteEditar = new RepresentanteDto
             {
                 Id_Representante = representante.Id_Representante,
@@ -289,12 +280,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             ViewBag.titulo = "ELIMINAR REPRESENTANTE";
 
-            RepresentanteDto? representante = await representanteApiService.ObtenerRepresentantePorId(id); // Llamada a la API
+            RepresentanteDto? representante = await representanteApiService.ObtenerRepresentantePorId(id); 
             if (representante == null)
             {
                 return BadRequest("el representante no existe");
             }
-            // 2. Mapear el DTO a la Entidad
             var representanteEditar = new RepresentanteDto
             {
                 Id_Representante = representante.Id_Representante,
@@ -318,55 +308,17 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
             return View("EliminarRepresentante", representanteEditar);
         }
 
-        [HttpPost] // Cambia a HttpPost
+        [HttpPost] 
         public async Task<IActionResult> EliminarRepresentante(int id)
         {
-            bool eliminado = await representanteApiService.EliminarRepresentantePorId(id); // Llamada a la API
+            bool eliminado = await representanteApiService.EliminarRepresentantePorId(id); 
             if (!eliminado)
             {
                 return BadRequest("No se pudo eliminar el Representante.");
             }
             return RedirectToAction("TablaDeContenido");
         }
-        /*[HttpGet]
-        // Acción para mostrar la lista de médicos por especialidad
-        /*public async Task<IActionResult> PorEspecialidad(int especialidadId)
-        {
-            try
-            {
-                List<MedicoDto> medicos = await especialidadApiService.PorEspecialidad(especialidadId);
-                ViewBag.Especialidad = "Medico de Familia"; ViewBag.titulo = "Médicos por Especialidad";
-                return View(medicos);
-            }
-            catch (HttpRequestException ex)
-            {
-                if (ex.InnerException is System.Net.Sockets.SocketException socketEx)
-                {
-                    if (socketEx.SocketErrorCode == System.Net.Sockets.SocketError.ConnectionRefused)
-                    {
-                        TempData["MensajeError"] = "No se pudo conectar con la API de médicos. Compruebe que la API esté en ejecución.";
-                        logger.LogError(ex, "Error al obtener médicos: Conexión rechazada."); // Log
-                    }
-                    else
-                    {
-                        TempData["MensajeError"] = "Error de red al obtener la lista de médicos.";
-                        logger.LogError(ex, "Error al obtener médicos: Error de red.");
-                    }
-                }
-                else
-                {
-                    TempData["MensajeError"] = "Error de HTTP al obtener la lista de médicos.";
-                    logger.LogError(ex, "Error al obtener médicos: Error de HTTP.");
-                }
-                return View(new List<MedicoDto>()); // Devuelve una lista vacía para no romper la página.
-            }
-            catch (Exception ex)
-            {
-                TempData["MensajeError"] = "Ocurrió un error inesperado al obtener la lista de médicos.";
-                logger.LogError(ex, "Error inesperado al obtener médicos.");
-                return View(new List<MedicoDto>());
-            }
-        }*/
+
     }
     
 }

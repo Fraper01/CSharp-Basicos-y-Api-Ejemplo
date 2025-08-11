@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_TABLADEVALORES_CLINICA", "MVC_TABLADEVALORES_CLINICA\MVC_TABLADEVALORES_CLINICA.csproj", "{B72BE579-16D4-45B3-8394-2B80D063D8B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi_Clinica.Shared", "..\..\WebApi_Clinica.Shared\WebApi_Clinica.Shared.csproj", "{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi_Clinica.Shared", "..\WebApi_Clinica.Shared\WebApi_Clinica.Shared.csproj", "{A11F5154-CF31-06F6-2A11-C823FEF2B148}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +17,15 @@ Global
 		{B72BE579-16D4-45B3-8394-2B80D063D8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B72BE579-16D4-45B3-8394-2B80D063D8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B72BE579-16D4-45B3-8394-2B80D063D8B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99B7E807-DEDB-4AEF-BB75-37230EC35A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A11F5154-CF31-06F6-2A11-C823FEF2B148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11F5154-CF31-06F6-2A11-C823FEF2B148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11F5154-CF31-06F6-2A11-C823FEF2B148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11F5154-CF31-06F6-2A11-C823FEF2B148}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1A330C0-C058-4FB9-839C-00A7BF4E4BA5}
 	EndGlobalSection
 EndGlobal

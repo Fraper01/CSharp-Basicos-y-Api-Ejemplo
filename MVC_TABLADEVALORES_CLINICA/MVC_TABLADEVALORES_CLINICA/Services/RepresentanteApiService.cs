@@ -26,12 +26,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
                 // Deserializa a la clase que representa la estructura completa
                 var respuestaApi = JsonSerializer.Deserialize<RespuestaApiRepresentantes>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                // Accede a la lista de representantes desde la propiedad "Representantes"
-                List<RepresentanteDto> representantesEntities = respuestaApi?.Representantes ?? new List<RepresentanteDto>(); // Manejo de null
+                List<RepresentanteDto> representantesEntities = respuestaApi?.Representantes ?? new List<RepresentanteDto>(); 
 
                 if (representantesEntities == null)
                 {
-                    return new List<RepresentanteDto>(); // Retorna una lista vacía si no hay datos
+                    return new List<RepresentanteDto>(); 
                 }
 
                 List<RepresentanteDto> representanteDtos = representantesEntities.Select(representante => new RepresentanteDto
@@ -118,24 +117,20 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
                 return false;
             }
         }
-        // Acción para mostrar la lista de médicos por especialidad
         public async Task<List<PacienteDto>>? PorRepresentante(int respresentanteId)
         {
             try
             {
-                // Construye la URL de la API para obtener los médicos por especialidad.
                 string url = $"{baseUrl}/Representante/{respresentanteId}";
-                // Llama a la API para obtener los datos.
                 HttpResponseMessage response = await httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
                 // Deserializa a la clase que representa la estructura completa
                 var respuestaApi = JsonSerializer.Deserialize<RespuestaApiPacientes>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                // Accede a la lista de paciente desde la propiedad "Paciente"
-                List<PacienteDto> pacientesEntities = respuestaApi?.Pacientes ?? new List<PacienteDto>(); // Manejo de null
+                List<PacienteDto> pacientesEntities = respuestaApi?.Pacientes ?? new List<PacienteDto>(); 
                 if (pacientesEntities == null)
                 {
-                    return new List<PacienteDto>(); // Retorna una lista vacía si no hay datos
+                    return new List<PacienteDto>(); 
                 }
                 List<PacienteDto> pacienteDtos = pacientesEntities.Select(paciente => new PacienteDto
                 {
@@ -175,15 +170,14 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
             }
         }
     }
-    // Clase para representar la estructura completa del JSON
     public class RespuestaApiRepresentantes
     {
-        [JsonPropertyName("$values")] // Esto mapea la propiedad "$values" del JSON
+        [JsonPropertyName("$values")] 
         public List<RepresentanteDto>? Representantes { get; set; }
     }
     public class RespuestaApiPacientes
     {
-        [JsonPropertyName("$values")] // Esto mapea la propiedad "$values" del JSON
+        [JsonPropertyName("$values")] 
         public List<PacienteDto>? Pacientes { get; set; }
     }
 

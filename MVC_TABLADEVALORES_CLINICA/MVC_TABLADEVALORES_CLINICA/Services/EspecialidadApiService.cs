@@ -26,12 +26,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
                 // Deserializa a la clase que representa la estructura completa
                 var respuestaApi = JsonSerializer.Deserialize<RespuestaApiEspecialidades>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                // Accede a la lista de especialidades desde la propiedad "Especialidades"
-                List<EspecialidadDto> especialidadesEntities = respuestaApi?.Especialidades ?? new List<EspecialidadDto>(); // Manejo de null
+                List<EspecialidadDto> especialidadesEntities = respuestaApi?.Especialidades ?? new List<EspecialidadDto>(); 
 
                 if (especialidadesEntities == null)
                 {
-                    return new List<EspecialidadDto>(); // Retorna una lista vacía si no hay datos
+                    return new List<EspecialidadDto>(); 
                 }
 
                 List<EspecialidadDto> especialidadesDtos = especialidadesEntities.Select(especialidad => new EspecialidadDto
@@ -103,24 +102,21 @@ namespace MVC_TABLADEVALORES_CLINICA.Services
                 return false;
             }
         }
-        // Acción para mostrar la lista de médicos por especialidad
         public async Task<List<MedicoDto>>? PorEspecialidad(int especialidadId)
         {
             try
             {
                 // Construye la URL de la API para obtener los médicos por especialidad.
                 string url = $"{baseUrl}/Especialidad/{especialidadId}";
-                // Llama a la API para obtener los datos.
                 HttpResponseMessage response = await httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
                 // Deserializa a la clase que representa la estructura completa
                 var respuestaApi = JsonSerializer.Deserialize<RespuestaApiMedicos>(jsonString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                // Accede a la lista de médicos desde la propiedad "Medicos"
-                List<MedicoDto> medicosEntities = respuestaApi?.Medicos ?? new List<MedicoDto>(); // Manejo de null
+                List<MedicoDto> medicosEntities = respuestaApi?.Medicos ?? new List<MedicoDto>(); 
                 if (medicosEntities == null)
                 {
-                    return new List<MedicoDto>(); // Retorna una lista vacía si no hay datos
+                    return new List<MedicoDto>(); 
                 }
                 List<MedicoDto> medicosDtos = medicosEntities.Select(medico => new MedicoDto
                 {

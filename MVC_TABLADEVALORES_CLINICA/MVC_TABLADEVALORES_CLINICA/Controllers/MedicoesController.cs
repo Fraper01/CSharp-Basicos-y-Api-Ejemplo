@@ -13,16 +13,15 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
 {
     public class MedicoesController : Controller
     {
-        //HTTP: get, post, put, delete (RESTFULL)
 
         private readonly MedicoApiService medicoApiService;
-        private readonly EspecialidadApiService especialidadApiService; // Segundo servicio para obtener especialidades
-        private readonly ILogger<MedicoesController> logger; // Añade lista de Errores al log
+        private readonly EspecialidadApiService especialidadApiService; 
+        private readonly ILogger<MedicoesController> logger; 
 
         public MedicoesController(MedicoApiService medicoApiClient, EspecialidadApiService especialidadApiService, ILogger<MedicoesController> _logger)
         {
             this.medicoApiService = medicoApiClient;
-            this.especialidadApiService = especialidadApiService; // Inicializa el servicio de especialidades
+            this.especialidadApiService = especialidadApiService; 
             logger = _logger;
         }
 
@@ -67,7 +66,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     TempData["MensajeError"] = "Error de HTTP al obtener la lista de médicos.";
                     logger.LogError(ex, "Error al obtener médicos: Error de HTTP.");
                 }
-                return View(new List<MedicoDto>()); // Devuelve una lista vacía para no romper la página.
+                return View(new List<MedicoDto>()); 
             }
             catch (Exception ex)
             {
@@ -79,7 +78,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerMedicoPorId(int id)
         {
-            MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); // Llamada a la API
+            MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); 
             if (medico == null)
             {
                 return BadRequest("El medico no existe.");
@@ -92,7 +91,6 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             try
             {
-                // Obtener la lista de especialidades desde la API
                 List<EspecialidadDto> especialidadesDto = await especialidadApiService.ObtenerEspecialidades();
 
                 // Mapear los DTOs a objetos SelectListItem para el DropDownList
@@ -145,12 +143,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
             {
                 try
                 {
-                    // Llamada a la API
                     bool agregado = await medicoApiService.AgregarMedico(medico);
                     if (agregado)
                     {
                         TempData["MensajeExito"] = "Médico agregado correctamente.";
-                        return RedirectToAction(nameof(TablaDeContenido)); // Redirigir a la lista de médicos
+                        return RedirectToAction(nameof(TablaDeContenido)); 
                     }
                     else
                     {
@@ -160,8 +157,8 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                 }
                 catch (EspecialidadNoEncontradaException ex)
                 {
-                    TempData["MensajeError"] = ex.Message; // Almacena el mensaje de la excepción en TempData
-                    ModelState.AddModelError("Especialidad", ex.Message); // Agrega el error al ModelState para mostrarlo en la vista
+                    TempData["MensajeError"] = ex.Message; 
+                    ModelState.AddModelError("Especialidad", ex.Message); 
                     logger.LogError(ex, "Error al agregar el médico. Especialidad no Encontrada");
                 }
                 catch (Exception ex)
@@ -172,17 +169,16 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     ModelState.AddModelError(string.Empty, "Error al agregar el médico. " + ex.Message);
                 }
             }
-            // Si llegamos aquí, algo salió mal, así que necesitamos repopular el DropDownList
             List<EspecialidadDto> especialidadesDto = await especialidadApiService.ObtenerEspecialidades();
             List<SelectListItem> especialidadesSelectList = especialidadesDto
-                .OrderBy(e => e.Nombre) // Ordenar por el nombre de la especialidad
+                .OrderBy(e => e.Nombre) 
                 .Select(e => new SelectListItem
                 {
                     Value = e.Id.ToString(),
                     Text = e.Nombre
                 }).ToList();
             ViewBag.Especialidades = especialidadesSelectList;
-            return View(medico); // Mostrar la vista con errores
+            return View(medico); 
         }
 
         [HttpGet]
@@ -190,13 +186,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             try
             {
-                // 1. Localiza el Medico
-                MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); // Llamada a la API
+                MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); 
                 if (medico == null)
                 {
                     return BadRequest("El medico no existe");
                 }
-                // 2. Mapear el DTO a la Entidad
                 var medicoEditar = new Medico
                 {
                     Id = medico.Id,
@@ -206,7 +200,6 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     EspecialidadId = medico.EspecialidadId,
                     Descripcion = medico.Descripcion,
                 };
-                // 3. Obtener la lista de especialidades desde la API
                 List<EspecialidadDto> especialidadesDto = await especialidadApiService.ObtenerEspecialidades();
                 List<SelectListItem> especialidadesSelectList = especialidadesDto
                     .OrderBy(e => e.Nombre) // Ordenar por el nombre de la especialidad
@@ -226,7 +219,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     if (socketEx.SocketErrorCode == System.Net.Sockets.SocketError.ConnectionRefused)
                     {
                         TempData["MensajeError"] = "No se pudo conectar con la API de médicos. Compruebe que la API esté en ejecución.";
-                        logger.LogError(ex, "Error al obtener médicos: Conexión rechazada."); // Log
+                        logger.LogError(ex, "Error al obtener médicos: Conexión rechazada."); 
                     }
                     else
                     {
@@ -256,11 +249,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
             {
                 try
                 {
-                    bool actualizado = await medicoApiService.ActualizarMedico(medico); // Llamada a la API
+                    bool actualizado = await medicoApiService.ActualizarMedico(medico); 
                     if (actualizado)
                     {
                         TempData["MensajeExito"] = "Médico modificado correctamente.";
-                        return RedirectToAction(nameof(TablaDeContenido)); // Redirigir a la lista de médicos
+                        return RedirectToAction(nameof(TablaDeContenido)); 
                     }
                     else
                     {
@@ -270,18 +263,15 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                 }
                 catch (EspecialidadNoEncontradaException ex)
                 {
-                    TempData["MensajeError"] = ex.Message; // Almacena el mensaje de la excepción en TempData
-                    ModelState.AddModelError("Especialidad", ex.Message); // Agrega el error al ModelState para mostrarlo en la vista
+                    TempData["MensajeError"] = ex.Message; 
+                    ModelState.AddModelError("Especialidad", ex.Message); 
                 }
                 catch (Exception ex)
                 {
-                    // Log the error
-                    //_logger.LogError(ex, "Error al agregar el médico.");
                     TempData["MensajeError"] = ex.Message;
                     ModelState.AddModelError(string.Empty, "Error al agregar el médico.");
                 }
             }
-            // Si llegamos aquí, algo salió mal, así que necesitamos repopular el DropDownList
             List<EspecialidadDto> especialidadesDto = await especialidadApiService.ObtenerEspecialidades();
             List<SelectListItem> especialidadesSelectList = especialidadesDto
                 .OrderBy(e => e.Nombre) // Ordenar por el nombre de la especialidad
@@ -290,7 +280,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     Value = e.Id.ToString(),
                     Text = e.Nombre
                 }).ToList();
-            ViewBag.Especialidades = especialidadesSelectList; return View(medico); // Mostrar la vista con errores
+            ViewBag.Especialidades = especialidadesSelectList; return View(medico); 
         }
 
         [HttpGet]
@@ -298,12 +288,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             ViewBag.titulo = "CONSULTA MEDICO";
 
-            MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); // Llamada a la API
+            MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); 
             if (medico == null)
             {
                 return BadRequest("El medico no existe");
             }
-            // 2. Mapear el DTO a la Entidad
             var medicoEditar = new MedicoDto
             {
                 Id = medico.Id,
@@ -322,12 +311,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
         {
             ViewBag.titulo = "ELIMINAR MEDICO";
 
-            MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); // Llamada a la API
+            MedicoDto? medico = await medicoApiService.ObtenerMedicoPorId(id); 
             if (medico == null)
             {
                 return BadRequest("El medico no existe");
             }
-            // 2. Mapear el DTO a la Entidad
             var medicoEditar = new MedicoDto
             {
                 Id = medico.Id,
@@ -341,10 +329,10 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
             return View("EliminarMedico", medicoEditar);
         }
 
-        [HttpPost] // Cambia a HttpPost
+        [HttpPost] 
         public async Task<IActionResult> EliminarMedico(int id)
         {
-            bool eliminado = await medicoApiService.EliminarMedicoPorId(id); // Llamada a la API
+            bool eliminado = await medicoApiService.EliminarMedicoPorId(id); 
             if (!eliminado)
             {
                 TempData["MensajeError"] = "Error al eliminar el Médico.";
@@ -354,12 +342,11 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
             else
             {
                 TempData["MensajeExito"] = "Médico eliminado correctamente.";
-                return RedirectToAction(nameof(TablaDeContenido)); // Redirigir a la lista de médicos
+                return RedirectToAction(nameof(TablaDeContenido)); 
             }
         }
 
         [HttpGet]
-        // Acción para mostrar la lista de médicos por especialidad
         public async Task<IActionResult> PorEspecialidad(int especialidadId)
         {
             try
@@ -370,19 +357,17 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                 if (medicos == null || medicos.Count == 0)
                 {
                     TempData["MensajeError"] = "No se encontraron médicos para la especialidad seleccionada.";
-                    return RedirectToAction(nameof(SeleccionarEspecialidad)); // Redirigir a la vista de selección
+                    return RedirectToAction(nameof(SeleccionarEspecialidad)); 
                 }
-                // Recuperar el nombre de la especialidad
 #pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
                 string especialidadNombre = medicos.FirstOrDefault()?.EspecialidadNombre;
 #pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
                 if (string.IsNullOrEmpty(especialidadNombre))
                 {
                     TempData["MensajeError"] = "No se encontró el nombre de la especialidad.";
-                    return RedirectToAction(nameof(SeleccionarEspecialidad)); // Redirigir a la vista de selección
+                    return RedirectToAction(nameof(SeleccionarEspecialidad)); 
                 }
 
-                // Pasar el nombre de la especialidad a la vista
                 ViewBag.EspecialidadNombre = especialidadNombre;
                 ViewBag.titulo = "Médicos por Especialidad";
                 return View(medicos);
@@ -391,7 +376,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
             {
                 TempData["MensajeError"] = ex.Message;
                 logger.LogWarning(ex, "Medicos por Especialidad no encontrado.");
-                return View(new List<MedicoDto>()); // Devuelve una lista vacía o una vista de error.
+                return View(new List<MedicoDto>()); 
             }
             catch (HttpRequestException ex)
             {
@@ -400,7 +385,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     if (socketEx.SocketErrorCode == System.Net.Sockets.SocketError.ConnectionRefused)
                     {
                         TempData["MensajeError"] = "No se pudo conectar con la API de médicos. Compruebe que la API esté en ejecución.";
-                        logger.LogError(ex, "Error al obtener médicos: Conexión rechazada."); // Log
+                        logger.LogError(ex, "Error al obtener médicos: Conexión rechazada."); 
                     }
                     else
                     {
@@ -413,7 +398,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                     TempData["MensajeError"] = "Error de HTTP al obtener la lista de médicos.";
                     logger.LogError(ex, "Error al obtener médicos: Error de HTTP.");
                 }
-                return View(new List<MedicoDto>()); // Devuelve una lista vacía para no romper la página.
+                return View(new List<MedicoDto>()); 
             }
             catch (Exception ex)
             {
@@ -422,13 +407,10 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                 return View(new List<MedicoDto>());
             }
         }
-        // Acción para MOSTRAR la página con el dropdown de selección
         [HttpGet]
         public async Task<IActionResult> SeleccionarEspecialidad()
         {
-            // 1. Obtener la lista de especialidades (ID y Nombre)
             List<EspecialidadDto> especialidadesDto = await especialidadApiService.ObtenerEspecialidades();
-            // 2. Crear una lista de SelectListItem para el dropdown
             var especialidadesSelectList = new List<SelectListItem>();
             especialidadesSelectList.Add(new SelectListItem { Value = "", Text = "-- Seleccione una Especialidad --", Disabled = true, Selected = true }); // Opción por defecto
 
@@ -437,10 +419,9 @@ namespace MVC_TABLADEVALORES_CLINICA.Controllers
                 especialidadesSelectList.Add(new SelectListItem { Value = esp.Id.ToString(), Text = esp.Nombre });
             }
 
-            // 3. Pasar la lista a la vista (usando ViewBag o un ViewModel)
             ViewBag.Especialidades = especialidadesSelectList;
 
-            return View(); // Devuelve la vista SeleccionarEspecialidad.cshtml
+            return View(); 
         }
     }
 }

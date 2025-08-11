@@ -15,7 +15,6 @@ namespace MVC_TABLADEVALORES_CLINICA.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server = tcp:sistemamedicodbserver.database.windows.net, 1433; Initial Catalog = SistemaMedicoDB; Persist Security Info = False; User ID = Administrador; Password = Cl.udio1972; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30; ");
             optionsBuilder.UseSqlServer("");
             base.OnConfiguring(optionsBuilder);
         }
@@ -26,7 +25,7 @@ namespace MVC_TABLADEVALORES_CLINICA.Models
                 .HasOne<Especialidad>(m => m.Especialidad)
                 .WithMany(e => e.Medicos)
                 .HasForeignKey(m => m.EspecialidadId)
-                .HasConstraintName("FK_Medicos05_Especialidades05"); // Nombre del constraint de la clave foránea
+                .HasConstraintName("FK_Medicos05_Especialidades05"); 
 
             modelBuilder.Entity<Paciente>()
                 .HasOne<Representante>(p => p.Representante)
